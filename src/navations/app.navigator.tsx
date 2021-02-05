@@ -5,12 +5,18 @@ import { DashBoardScreen } from "../scenes/dashboard/dashboard.component";
 
 const Stack = createStackNavigator();
 
-const AppNavigator = (props) => {
-    return (
-        <Stack.Navigator {...props} headerMode='none'>
-            <Stack.Screen name={AppRoute.DASHBOARD} component={DashBoardScreen} />
-        </Stack.Navigator>
-    )
+interface Props {
+    initialRouteName: string;
 }
 
-export default AppNavigator;
+export class AppNavigator extends React.Component<Props> {
+
+    render() {
+        return (
+            <Stack.Navigator {...this.props} headerMode='none'>
+                <Stack.Screen name={AppRoute.DASHBOARD} component={DashBoardScreen} />
+            </Stack.Navigator>
+        )
+    }
+
+}

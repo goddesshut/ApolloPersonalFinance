@@ -1,13 +1,16 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-export const DashBoardScreen: React.FC = () => {
+export class DashBoardScreen extends React.Component {
 
-    return (
-        <View style={styles.container}>
-            <Text style={styles.text}>Hellp Apollo!!</Text>
-        </View>
-    )
+    render() {
+        return (
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.text}>Hellp Apollo!!</Text>
+            </SafeAreaView>
+        )
+    } 
 }
 
 const styles = StyleSheet.create({

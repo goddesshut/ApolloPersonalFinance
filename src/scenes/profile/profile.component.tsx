@@ -1,18 +1,47 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { TouchableHighlight } from "react-native-gesture-handler";
+import { StyleSheet, View } from "react-native";
+import { Badge, Icon, ListItem } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export class ProfileScreen extends React.Component {
 
     render() {
         return (
-            <SafeAreaView style={styles.container}>
-                <TouchableHighlight style={styles.touchContainer} onPress={this.goToUserSetting}>
-                    <View style={styles.button}>
-                        <Text>User setting</Text>
+            <SafeAreaView>
+                <ListItem bottomDivider>
+                    <Icon name='settings' style={styles.icon} />
+                    <ListItem.Content>
+                        <ListItem.Title>Profile Setting</ListItem.Title>
+                    </ListItem.Content>
+                </ListItem>
+
+                <ListItem bottomDivider>
+                    <Icon name='account-balance-wallet' style={styles.icon} />
+                    <ListItem.Content>
+                        <ListItem.Title>Saving</ListItem.Title>
+                    </ListItem.Content>
+                </ListItem>
+
+                <ListItem bottomDivider>
+                    <View style={styles.icon}>
+                        <Icon name='notifications'  />
+                        <Badge
+                            value={3}
+                            status="warning"
+                            containerStyle={{ position: 'absolute',top: -10, right: -15 }}
+                        />
                     </View>
-                </TouchableHighlight>
+                    <ListItem.Content>
+                        <ListItem.Title>Notification</ListItem.Title>
+                    </ListItem.Content>
+                </ListItem>
+
+                <ListItem>
+                    <Icon name='logout' style={styles.icon} />
+                    <ListItem.Content>
+                        <ListItem.Title>Logout</ListItem.Title>
+                    </ListItem.Content>
+                </ListItem>
             </SafeAreaView>
         )
     }
@@ -23,20 +52,7 @@ export class ProfileScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-    },
-    text: {
-        textAlign: 'center',
-    },
-    touchContainer: {
-        flex: 1,
-        paddingHorizontal: 10
-    },
-    button: {
-        alignItems: "center",
-        padding: 10
-    },
+    icon: {
+        width: 20
+    }
 });

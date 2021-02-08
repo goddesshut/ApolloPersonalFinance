@@ -5,6 +5,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 
 import { DashBoardScreen } from "../scenes/dashboard/dashboard.component";
 import { ProfileScreen } from "../scenes/profile/profile.component";
+import { BudgetScreen } from "../scenes/budget/budget.component";
 
 const Tabs = createMaterialBottomTabNavigator();
 
@@ -23,6 +24,14 @@ export class AppNavigator extends React.Component<Props> {
                     options={{
                         tabBarLabel: AppRoute.DASHBOARD,
                         tabBarIcon: ({color}) => ( <MaterialCommunityIcons name="home" color={color} size={28} /> ),
+                    }} 
+                />
+                <Tabs.Screen 
+                    name={AppRoute.BUDGET} 
+                    component={BudgetScreen} 
+                    options={{
+                        tabBarLabel: AppRoute.BUDGET,
+                        tabBarIcon: ({color}) => ( <MaterialCommunityIcons name="piggy-bank" color={color} size={28} /> ),
                     }} 
                 />
                 <Tabs.Screen 

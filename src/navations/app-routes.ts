@@ -1,4 +1,5 @@
 export enum AppRoute {
     DASHBOARD = 'Dashboard',
-    AUTH = 'Authorized'
+    AUTH = 'Authorized',
+    PROFILE = 'Profile'
 }

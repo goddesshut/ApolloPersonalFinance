@@ -3,6 +3,7 @@ import { Text } from "react-native";
 
 interface Props {
     value: number,
+    hide2digits?: bool,
     style?: any
 }
 
@@ -11,9 +12,10 @@ export class CurrencyFormat extends Component<Props> {
     constructor(props) {
         super(props);
     }
-
+    
     private convertFormat() {
-        return this.props.value.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+        const numWithDigits =  this.props.hide2digits ? this.props.value.toString() : this.props.value.toFixed(2);
+        return numWithDigits.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
     
     render() {

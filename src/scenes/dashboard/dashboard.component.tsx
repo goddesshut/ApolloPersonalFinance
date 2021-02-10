@@ -33,8 +33,8 @@ export class DashBoardScreen extends React.Component {
         const monthExpensePercentage = (expense * 100 / income);
         const monthBalancePercentage = (balance * 100 / income);
 
-        const acctYearExpenseLastMonth = income * 0.40;
-        const acctYearSavingLastMonth = income * 0.25;
+        const acctYearExpenseLastMonth = income * 0.50;
+        const acctYearSavingLastMonth = income * 0.30;
 
         const siYearEstimate = 12*siEstimate;
         const epYearEstimate = 12*epEstimate;

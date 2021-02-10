@@ -26,7 +26,7 @@ export class DashBoardScreen extends React.Component {
         const balance = income - saving - expense;
 
         const epEstimate = income * 0.35;
-        const siEstimate = income * 0.30;
+        const siEstimate = income * 0.40;
 
         const monthSavingPercentage = (saving * 100 / income);
         const monthExpensePercentage = (expense * 100 / income);
@@ -238,7 +238,7 @@ export class DashBoardScreen extends React.Component {
                                     <Text style={styles.epMoneyValue}>- {currencyFormat(epOthers)}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
-                                    <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Balance : </Text>
+                                    <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Remainder : </Text>
                                     <Text style={styles.epMoneyValue}>+ {currencyFormat(epEstimate - expense)}</Text>
                                 </View>
                             </View>
@@ -316,7 +316,7 @@ export class DashBoardScreen extends React.Component {
                                     <Text style={styles.epMoneyValue}>+ {currencyFormat(siNewBikeSaving)}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
-                                    <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Balance : </Text>
+                                    <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Remainder : </Text>
                                     <Text style={styles.epMoneyValue}>- {currencyFormat(siEstimate - saving)}</Text>
                                 </View>
                             </View>

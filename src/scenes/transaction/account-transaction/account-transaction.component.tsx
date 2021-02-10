@@ -1,15 +1,17 @@
 import React, { Component } from "react";
-import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
+import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
+import { CurrencyFormat } from "../../../utils/currency-format.component"
 import { TransactionListScreen } from "../transaction-list/transaction-list.component";
 
 interface IAccountList {
     accountType: string,
     accountName: string,
     accountNumber: string,
-    balance: number
+    balance: number,
+    img?: string
 }
 
 export class AccountTransactionScreen extends Component {
@@ -27,18 +29,21 @@ export class AccountTransactionScreen extends Component {
                     accountName: "Apollo",
                     accountNumber: "123-221-5486-223",
                     balance: 20000.00,
+                    img: 'https://www.gamblerspick.com/uploads/monthly_2017_09/bangkokbank.png.42add7fd82ca6c9969d985a5b913ecf0.png'
                 },
                 {
                     accountType: "",
-                    accountName: "Rock",
+                    accountName: "I'm King",
                     accountNumber: "238-453-8486-638",
-                    balance: 100000.00,
+                    balance: 2900000.00,
+                    img: 'https://102169-290234-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2015/11/icon-bank-scb.png'
                 },
                 {
                     accountType: "",
-                    accountName: "I'm rich",
+                    accountName: "Prayut Ja",
                     accountNumber: "564-864-4233-487",
                     balance: 1500000.00,
+                    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRiB2OFs5GTr5_zwPVXj-A6z2tpD2IuwKSe8w&usqp=CAU'
                 },
                 {
                     accountType: "",
@@ -55,15 +60,21 @@ export class AccountTransactionScreen extends Component {
             <View style={styles.slide}>
                 <View style={styles.slideInnerContainer}>
                     <View style={{ flexDirection: 'row' }}>
+                        {item.img ? 
+                        <Image style={styles.img} resizeMode="center" source={{ uri: item.img }} /> :
                         <Icon name='account-balance-wallet' style={styles.icon} size={42} color={'green'} />
-                        <Text style={{ fontSize: 28 }}>{item.accountName}</Text>
+                        } 
+                        <Text style={{ fontSize: 28, fontWeight: 'bold' }}>{item.accountName}</Text>
                     </View>
                     <Text style={{ paddingTop: 25, fontSize: 16 }}>
                         Saving Account: {item.accountNumber}
                     </Text>
-                    <Text style={{ paddingTop: 15, fontSize: 16 }}>
-                        Account balance: {item.balance}
-                    </Text>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <Text style={{ paddingTop: 15, fontSize: 16 }}>
+                            Account balance : &nbsp;
+                        </Text>
+                        <CurrencyFormat style={{ paddingTop: 15, fontSize: 16 }} value={item.balance} />
+                    </View>
                 </View>
             </View>
         )
@@ -118,6 +129,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         paddingRight: 35
+    },
+    img: {
+        width: 40, 
+        height: 40,
+        marginRight: 35
     },
     transactionContainer: {
         borderRadius: 8,

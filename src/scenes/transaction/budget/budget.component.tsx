@@ -3,6 +3,7 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
+import { CurrencyFormat } from "../../../utils/currency-format.component"
 import { CategoryType } from "../../../model/categoryType";
 import { TransactionListScreen } from "../transaction-list/transaction-list.component";
 
@@ -44,9 +45,16 @@ export class BudgetScreen extends Component {
                         <Icon name={item.icon} style={styles.icon} size={42} color={'green'} />
                         <Text style={{ fontSize: 28 }}>{item.categoryType}</Text>
                     </View>
-                    <Text style={{ paddingTop: 25, fontSize: 18, fontWeight: '600' }}>
+                    {/* <Text style={{ paddingTop: 25, fontSize: 18, fontWeight: '600' }}>
                         Budget balance: {item.balance}
-                    </Text>
+                    </Text> */}
+
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <Text style={{ paddingTop: 15, fontSize: 16 }}>
+                        Budget balance : &nbsp;
+                        </Text>
+                        <CurrencyFormat style={{ paddingTop: 15, fontSize: 16 }} value={item.balance} />
+                    </View>
                 </View>
             </View>
         )

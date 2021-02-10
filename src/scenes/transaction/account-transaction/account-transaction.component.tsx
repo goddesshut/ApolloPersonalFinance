@@ -5,9 +5,16 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
 import { TransactionDetailScreen } from "../transaction-detail/transaction-detail.component";
 
+interface IAccountList {
+    accountType: string,
+    accountName: string,
+    accountNumber: string,
+    balance: number
+}
+
 export class AccountTransactionScreen extends Component {
 
-    state = { activeIndex: 0, accountList: [{}] };
+    state = { activeIndex: 0, accountList: [] as IAccountList[] };
 
     constructor(props) {
         super(props);
@@ -76,15 +83,10 @@ export class AccountTransactionScreen extends Component {
                         onSnapToItem={index => this.setState({ activeIndex: index })} />
                 </View>
 
-                <View style={{ paddingTop: 20, paddingLeft: 20 }}><Text style={{ fontSize: 16 }}>Tracsaction list</Text></View>
-                <ScrollView>
-                    <View style={styles.container}>
-                        <View style={styles.box}>
-                            <TransactionDetailScreen key={this.state.activeIndex} accountName={this.state.accountList[this.state.activeIndex].accountNumber} />
-                        </View>
-                    </View>
+                <View style={{ paddingTop: 15, paddingLeft: 20 }}><Text style={{ fontSize: 16 }}>Tracsaction list</Text></View>
+                <ScrollView style={styles.transactionContainer}>
+                    <TransactionDetailScreen key={`account-transaction-${this.state.activeIndex}`} transactionId={this.state.accountList[this.state.activeIndex].accountNumber} type={'account'} />
                 </ScrollView>
-
             </SafeAreaView>
         )
     }
@@ -117,13 +119,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingRight: 35
     },
-    container: {
-        flex: 1,
-        margin: 20,
-    },
-    box: {
+    transactionContainer: {
         borderRadius: 8,
         backgroundColor: '#E6E6E6',
-        padding: 10
+        padding: 10,
     }
 });

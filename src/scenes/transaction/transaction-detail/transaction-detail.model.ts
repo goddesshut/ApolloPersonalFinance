@@ -1,8 +1,7 @@
 import { CategoryType } from "../../../model/categoryType";
 import { TransactionType } from "../../../model/transactionType";
 
-
-export interface AccountTransactionDetail {
+export interface TransactionDetail {
     accountNumber: string,
     transactionType: TransactionType,
     categoryType: CategoryType
@@ -10,7 +9,7 @@ export interface AccountTransactionDetail {
     updateDate: string
 }
 
-export const AccountTransactionDetailData: AccountTransactionDetail[] = [
+export const TransactionDetailData: TransactionDetail[] = [
     {
        accountNumber: '123-221-5486-223',
        transactionType: TransactionType.INCOME,

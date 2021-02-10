@@ -1,8 +1,9 @@
 import React from "react";
+import Pie from 'react-native-pie';
 import { StyleSheet, View, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, Button, Icon, Text, Badge } from 'react-native-elements'
-import Pie from 'react-native-pie';
+import { CurrencyFormat } from "../../utils/currency-format.component"
 
 export class DashBoardScreen extends React.Component {
 
@@ -118,48 +119,48 @@ export class DashBoardScreen extends React.Component {
                 fontSize: 16,
                 fontWeight: '700',
                 textAlign: 'center',
-                marginTop: 15
+                marginTop: 12
             },
             labelRemainingPercentage: {
                 color: '#333333',
                 fontSize: 16,
                 fontWeight: '700',
                 textAlign: 'center',
-                marginTop: 15
+                marginTop: 12
             },
             monthSavingPercentage: {
                 width: monthSavingPercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: 'steelblue'
             },
             monthExpensePercentage: {
                 width: monthExpensePercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: '#b44682'
             },
             monthBalancePercentage: {
                 width: monthBalancePercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: '#82b446'
             },
             yearActualSavingPercentage: {
                 width: yearActualSavingPercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: 'steelblue'
             },
             yearRemainingSavingPercentage: {
                 width: yearRemainingSavingPercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: '#c7d9e8'
             },
             yearActualExpensePercentage: {
                 width: yearActualSavingPercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: '#b44682'
             },
             yearRemainingExpensePercentage: {
                 width: yearRemainingSavingPercentage.toFixed(2) + '%',
-                height: 50, 
+                height: 46, 
                 backgroundColor: '#dda7c4'
             },
             button: {
@@ -168,10 +169,10 @@ export class DashBoardScreen extends React.Component {
             }
         });
 
-        currencyFormat = (num, hide2digits) => {
-            const numWithDigits = hide2digits ? num.toString() : num.toFixed(2);
-            return numWithDigits.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-        }
+        // currencyFormat = (num, hide2digits) => {
+        //     const numWithDigits = hide2digits ? num.toString() : num.toFixed(2);
+        //     return numWithDigits.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+        // }
 
         return (
             <SafeAreaView>
@@ -192,21 +193,21 @@ export class DashBoardScreen extends React.Component {
                         {/* <Card.Divider style={{margin: 0, padding: 0}}/> */}
                         <View style={styles.row}>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValueGreen}>{currencyFormat(saving)}</Text>
+                                <CurrencyFormat value={saving} style={styles.moneyValueGreen} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: 'steelblue'}}/> Saving ({Math.round(monthSavingPercentage) + '%'})</Text>
                             </View>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValueRed}>{currencyFormat(expense)}</Text>
+                                <CurrencyFormat value={expense} style={styles.moneyValueRed} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#b44682'}}/> Expense ({Math.round(monthExpensePercentage) + '%'})</Text>
                             </View>
                         </View>
                         <View style={styles.row}>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValue}>{currencyFormat(balance)}</Text>
+                                <CurrencyFormat value={balance} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Balance ({Math.round(monthBalancePercentage) + '%'})</Text>
                             </View>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValue}>{currencyFormat(income)}</Text>
+                                <CurrencyFormat value={income} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}>Total Income</Text>
                             </View>
                         </View>
@@ -249,42 +250,42 @@ export class DashBoardScreen extends React.Component {
                             <View style={styles.col2_60}>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#dda7c4'}}/> House loan (A): </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(epHouseLoan)}</Text>
+                                    <CurrencyFormat value={epHouseLoan} style={styles.epMoneyValueRed} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#cc7ba7'}}/> Electricity bill : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(epElectricity)}</Text>
+                                    <CurrencyFormat value={epElectricity} style={styles.epMoneyValueRed} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#a23f75'}}/> Food/drink : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(epFood)}</Text>
+                                    <CurrencyFormat value={epFood} style={styles.epMoneyValueRed} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#7d315a'}}/> Transport : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(epTransport)}</Text>
+                                    <CurrencyFormat value={epTransport} style={styles.epMoneyValueRed} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#5f2545'}}/> Others : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(epOthers)}</Text>
+                                    <CurrencyFormat value={epOthers} style={styles.epMoneyValueRed} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Remainder : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(epEstimate - expense)}</Text>
+                                    <CurrencyFormat value={epEstimate - expense} style={styles.epMoneyValueGreen} />
                                 </View>
                             </View>
                         </View>
                         {/* <Card.Divider style={{margin: 0, padding: 0}}/> */}
                         <View style={styles.row}>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(epEstimate)}</Text>
+                                <CurrencyFormat value={epEstimate} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}>Estimation</Text>
                             </View>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(expense)}</Text>
+                                <CurrencyFormat value={expense} style={styles.moneyValueRed} />
                                 <Text style={styles.labelSmall}>Total spending</Text>
                             </View>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(epHouseLoan)}</Text>
+                                <CurrencyFormat value={epHouseLoan} style={styles.moneyValueRed} />
                                 <Text style={styles.labelSmall}>Fixed expense</Text>
                             </View>
                         </View>
@@ -327,42 +328,42 @@ export class DashBoardScreen extends React.Component {
                             <View style={styles.col2_60}>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#c7d9e8'}}/> Retirement : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(siRetirementFund)}</Text>
+                                    <CurrencyFormat value={siRetirementFund} style={styles.epMoneyValueGreen} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#a2c0d9'}}/> Mutual fund : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(siMutualFund)}</Text>
+                                    <CurrencyFormat value={siMutualFund} style={styles.epMoneyValueGreen} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#7da7ca'}}/> Regular rate : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(siRegularSaving)}</Text>
+                                    <CurrencyFormat value={siRegularSaving} style={styles.epMoneyValueGreen} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#588ebb'}}/> Fixed rate (A) : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(siFixedRateSaving)}</Text>
+                                    <CurrencyFormat value={siFixedRateSaving} style={styles.epMoneyValueGreen} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#3f75a2'}}/> New bike (A) : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{currencyFormat(siNewBikeSaving)}</Text>
+                                    <CurrencyFormat value={siNewBikeSaving} style={styles.epMoneyValueGreen} />
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#82b446'}}/> Est. Remainder : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{currencyFormat(siEstimate - saving)}</Text>
+                                    <CurrencyFormat value={siEstimate - saving} style={styles.epMoneyValueRed} />
                                 </View>
                             </View>
                         </View>
                         {/* <Card.Divider style={{margin: 0, padding: 0}}/> */}
                         <View style={styles.row}>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(siEstimate)}</Text>
+                                <CurrencyFormat value={siEstimate} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}>Estimation</Text>
                             </View>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(saving)}</Text>
+                                <CurrencyFormat value={saving} style={styles.moneyValueGreen} />
                                 <Text style={styles.labelSmall}>Total saving</Text>
                             </View>
                             <View style={styles.col3}>
-                                <Text style={styles.moneyValue}>{currencyFormat(siFixedAmountSaving)}</Text>
+                                <CurrencyFormat value={siFixedAmountSaving} style={styles.moneyValueGreen} />
                                 <Text style={styles.labelSmall}>Fixed saving</Text>
                             </View>
                         </View>
@@ -383,11 +384,11 @@ export class DashBoardScreen extends React.Component {
                         
                         <View style={styles.row}>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValueGreen}>{currencyFormat(acctYearSaving)}</Text>
+                                <CurrencyFormat value={acctYearSaving} style={styles.moneyValueGreen} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: 'steelblue'}}/> Current ({Math.round(yearActualSavingPercentage) + '%'})</Text>
                             </View>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValue}>{currencyFormat(siYearEstimate)}</Text>
+                                <CurrencyFormat value={siYearEstimate} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#c7d9e8'}}/> Estimated ({Math.round(yearRemainingSavingPercentage) + '%'})</Text>
                             </View>
                         </View>
@@ -407,11 +408,11 @@ export class DashBoardScreen extends React.Component {
                         </View>
                         <View style={styles.row}>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValueRed}>{currencyFormat(acctYearExpense)}</Text>
+                                <CurrencyFormat value={acctYearExpense} style={styles.moneyValueRed} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#b44682'}}/> Current ({Math.round(yearActualExpensePercentage) + '%'})</Text>
                             </View>
                             <View style={styles.col2}>
-                                <Text style={styles.moneyValue}>{currencyFormat(epYearEstimate)}</Text>
+                                <CurrencyFormat value={epYearEstimate} style={styles.moneyValue} />
                                 <Text style={styles.labelSmall}><Badge badgeStyle={{backgroundColor: '#dda7c4'}}/> Estimated ({Math.round(yearRemainingExpensePercentage) + '%'})</Text>
                             </View>
                         </View>

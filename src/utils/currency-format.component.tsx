@@ -12,9 +12,9 @@ export class CurrencyFormat extends Component<Props> {
     constructor(props) {
         super(props);
     }
-    
-    private convertFormat() {
-        const numWithDigits =  this.props.hide2digits ? this.props.value.toString() : this.props.value.toFixed(2);
+
+    private convertFormat = (num, show2digits) => {
+        const numWithDigits = this.props.hide2digits ? this.props.value.toString() : this.props.value.toFixed(2);
         return numWithDigits.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
     }
     

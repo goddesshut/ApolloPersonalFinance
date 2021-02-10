@@ -4,13 +4,12 @@ import { Card, Header, Image, Icon, Button } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export class Accounts extends React.Component {
+
     render() {
         return (
-            <SafeAreaView style={{}}>
+            <SafeAreaView>
                 <Header
-                    leftComponent={{}}
                     centerComponent={{ text: 'Accounts', style: { color: '#fff', fontSize: 20 } }}
-                    rightComponent={{}}
                     containerStyle={{
                         backgroundColor: '#4caf50',
                         justifyContent: 'space-around',
@@ -19,43 +18,39 @@ export class Accounts extends React.Component {
                 {
                     card.map((u, i) => {
                         return (
-                            <>
-                                <Card key={i} containerStyle={{ height: 180 }}>
-                                    <View key={i} style={{ flex: 1, flexDirection: 'row' }}>
-                                        <View style={{ height: 50, width: 100, marginTop: 10, borderWidth: 0 }}>
-                                            <Image
-                                                style={{ width: 50, height: 50 }}
-                                                resizeMode="center"
-                                                source={{ uri: u.avatar }}
-                                            />
-                                        </View>
-                                        <View style={{ height: 50, width: 250, borderWidth: 0 }}>
-                                            <Text style={{ marginTop: 10, textAlign: 'right' }}>{u.name} - {u.accountType}</Text>
-                                            <Text style={{ marginTop: 5, textAlign: 'right' }}>{u.accountNumber}</Text>
-                                        </View>
+                            <Card key={'card' + i} containerStyle={{ height: 200, borderRadius:20}} >
+                                <View style={{ flex: 1, flexDirection: 'row' }}>
+                                    <View style={{ height: 50, width: '20%', marginTop: 10}}>
+                                        <Image
+                                            style={{ width: 50, height: 50 }}
+                                            resizeMode="center"
+                                            source={{ uri: u.avatar }}
+                                        />
                                     </View>
-                                    <Card.Divider style={{marginTop:70}}/>
-                                    <View style={{ flex: 1, flexDirection: 'row' }}>
-                                        <View style={{ height: 50, width: 150, marginTop: 10, borderWidth: 0 }}>
-                                            <Text style={{fontSize:18, fontWeight:'bold', textAlign: 'left' }}>Avalible Balance</Text>
-                                        </View>
-                                        <View style={{ height: 50, width: 200, borderWidth: 0 }}>
-                                            <Text style={{fontSize:18, fontWeight:'bold', marginTop: 10, textAlign: 'right' }}>{u.amount}</Text>
-                                        </View>
+                                    <View style={{ height: 50, width: '60%'}}>
+                                        <Text style={styles.boldTextCenter}>{u.name}</Text>
                                     </View>
-                                </Card>
-                            </>
+                                </View>
+                                <Card.Divider style={{marginTop:70}}/>
+                                <View style={{flex: 1, flexDirection: 'row'}}>
+                                    <Text style={[styles.boldText, {textAlign:'left'}]}>{u.accountType}</Text>
+                                    <Text style={[styles.boldText, {textAlign:'right'}]}>{u.accountNumber}</Text>
+                                </View>
+                                <View style={{marginTop:40, flex: 1, flexDirection: 'row' }}>
+                                    <Text style={[styles.boldText, {textAlign:'left'}]}>Avalible Balance</Text>
+                                    <Text style={[styles.boldText, {textAlign:'right'}]}>{u.amount}</Text>
+                                </View>
+                            </Card>
                         );
                     })
                 }
                 
                 <View style={{ 
-                    marginLeft:15, 
+                    marginLeft:10, 
                     marginTop: 15,
                     height: 70, 
-                    width: 380,
-                    alignItems: 'center'
-                    }}>
+                    width: '100%',
+                    alignItems: 'center'}}>
 
                     <Button
                         icon={{
@@ -92,24 +87,17 @@ const card = [
     },
 ];
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
-        alignItems: 'baseline',
-        borderWidth: 1,
+    boldText: {
+        height: 50, 
+        width: '50%' , 
+        marginTop: 10, 
+        fontSize:16, 
+        fontWeight:'bold',
     },
-    text: {
-        textAlign: 'center',
-    },
-    headerContainer: {
-        height: 50,
-        borderBottomWidth: 5,
-        backgroundColor: 'gray',
-        marginTop: 20,
-    },
-    headerText: {
-        fontWeight: 'bold',
-        textAlign: 'center',
-        fontSize: 20,
+    boldTextCenter: {
+        fontSize:18, 
+        fontWeight:'bold', 
+        marginTop: 10, 
+        textAlign: 'center'
     }
 });

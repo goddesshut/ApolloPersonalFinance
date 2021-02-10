@@ -73,18 +73,18 @@ export class Accounts extends React.Component {
 }
 const card = [
     {
-        name: 'BANGKOK BANK',
+        name: 'APOLLO',
         accountNumber: '12-8909-3829',
-        accountType: 'DEPOSIT',
+        accountType: 'SAVING ACCOUNT',
         amount:'290,382.00',
         avatar: 'https://www.gamblerspick.com/uploads/monthly_2017_09/bangkokbank.png.42add7fd82ca6c9969d985a5b913ecf0.png'
     },
     {
-        name: 'KBANK',
+        name: "I'M KING",
         accountNumber: '12-80908-2929',
-        accountType: 'SAVING',
+        accountType: 'SAVING ACCOUNT',
         amount:'10,382.00',
-        avatar: 'https://static.wikia.nocookie.net/logopedia/images/d/d3/KBank_logo.png'
+        avatar: 'https://102169-290234-raikfcquaxqncofqfm.stackpathdns.com/wp-content/uploads/2015/11/icon-bank-scb.png'
     },
 ];
 const styles = StyleSheet.create({

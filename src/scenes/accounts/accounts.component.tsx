@@ -9,10 +9,11 @@ export class Accounts extends React.Component {
         return (
             <SafeAreaView>
                 <Header
-                    centerComponent={{ text: 'Accounts', style: { color: '#fff', fontSize: 20 } }}
+                    centerComponent={{ text: 'Accounts', style: { color: '#4caf50', fontSize: 20 } }}
                     containerStyle={{
-                        backgroundColor: '#4caf50',
+                        backgroundColor: '#fff',
                         justifyContent: 'space-around',
+                        borderBottomColor: '#4caf50'
                     }}
                 />
                 {

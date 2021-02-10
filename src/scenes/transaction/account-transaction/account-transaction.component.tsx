@@ -3,7 +3,7 @@ import { Dimensions, ScrollView, StyleSheet, Text, View } from "react-native";
 import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
-import { TransactionDetailScreen } from "../transaction-detail/transaction-detail.component";
+import { TransactionListScreen } from "../transaction-list/transaction-list.component";
 
 interface IAccountList {
     accountType: string,
@@ -85,7 +85,7 @@ export class AccountTransactionScreen extends Component {
 
                 <View style={{ paddingTop: 15, paddingLeft: 20 }}><Text style={{ fontSize: 16 }}>Tracsaction list</Text></View>
                 <ScrollView style={styles.transactionContainer}>
-                    <TransactionDetailScreen key={`account-transaction-${this.state.activeIndex}`} transactionId={this.state.accountList[this.state.activeIndex].accountNumber} type={'account'} />
+                    <TransactionListScreen key={`account-transaction-${this.state.activeIndex}`} transactionId={this.state.accountList[this.state.activeIndex].accountNumber} type={'account'} />
                 </ScrollView>
             </SafeAreaView>
         )

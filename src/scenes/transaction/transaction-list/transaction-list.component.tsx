@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Icon, Card } from "react-native-elements";
 import { TransactionType } from "../../../model/transactionType";
-import { TransactionDetail, TransactionDetailData } from "./transaction-detail.model";
+import { TransactionDetail, TransactionDetailData } from "../model/transaction-list.model";
 
 interface Props {
     transactionId: string;
     type: string;
 }
 
-export class TransactionDetailScreen extends Component<Props> {
+export class TransactionListScreen extends Component<Props> {
 
     private transactionDetail: TransactionDetail[] = [];
 

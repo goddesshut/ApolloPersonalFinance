@@ -4,7 +4,7 @@ import { Icon } from "react-native-elements";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Carousel from "react-native-snap-carousel";
 import { CategoryType } from "../../../model/categoryType";
-import { TransactionDetailScreen } from "../transaction-detail/transaction-detail.component";
+import { TransactionListScreen } from "../transaction-list/transaction-list.component";
 
 interface IBudgetList {
     categoryType: CategoryType,
@@ -68,7 +68,7 @@ export class BudgetScreen extends Component {
 
                 <View style={{ paddingTop: 15, paddingLeft: 20 }}><Text style={{ fontSize: 16 }}>Tracsaction list</Text></View>
                 <ScrollView style={styles.transactionContainer}>
-                    <TransactionDetailScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].categoryType} type={'budget'} />
+                    <TransactionListScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].categoryType} type={'budget'} />
                 </ScrollView>
             </SafeAreaView>
         )

@@ -8,16 +8,16 @@ export class DashBoardScreen extends React.Component {
 
     render() {
         const epHouseLoan = 7200;
-        const epFood = 3200;
-        const epElectricity = 1100;
+        const epFood = 5200;
+        const epElectricity = 1800;
         const epTransport = 1400;
         const epOthers = 2000;
 
-        const siRetirementFund = 2000;
-        const siMutualFund = 2000;
+        const siRetirementFund = 3000;
+        const siMutualFund = 3000;
         const siRegularSaving = 5000;
-        const siFixedRateSaving = 5200;
-        const siNewBikeSaving = 800;
+        const siFixedRateSaving = 6200;
+        const siNewBikeSaving = 1800;
         const siFixedAmountSaving = siNewBikeSaving + siFixedRateSaving;
 
         const income = 50000;
@@ -25,7 +25,7 @@ export class DashBoardScreen extends React.Component {
         const expense = epHouseLoan + epFood + epElectricity + epTransport + epOthers;
         const balance = income - saving - expense;
 
-        const epEstimate = income * 0.35;
+        const epEstimate = income * 0.50;
         const siEstimate = income * 0.40;
 
         const monthSavingPercentage = (saving * 100 / income);

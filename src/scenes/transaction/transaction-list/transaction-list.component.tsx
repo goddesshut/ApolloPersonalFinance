@@ -16,9 +16,11 @@ export class TransactionListScreen extends Component<Props> {
 
     constructor(props) {
         super(props);
+        // first time loading data
         this.getTransactioDetail();
     }
 
+    // reload when properties has change
     shouldComponentUpdate(nextProps) {
         if (this.props.transactionId !== nextProps.transactionId) {
             this.getTransactioDetail();

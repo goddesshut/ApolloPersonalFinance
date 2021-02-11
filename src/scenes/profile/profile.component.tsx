@@ -5,13 +5,13 @@ import { SafeAreaView } from "react-native-safe-area-context";
 
 export class ProfileScreen extends React.Component {
 
-    state = { easterEgg1: false, easterEgg2: false}
+    state = { easterEgg1: false}
 
     constructor(props) {
         super(props);
     }
 
-    private showEasterEgg1() {
+    private showEasterEgg() {
         this.setState({ easterEgg1: true })
 
         setTimeout(() => {
@@ -23,21 +23,21 @@ export class ProfileScreen extends React.Component {
     render() {
         return (
             <SafeAreaView>
-                <ListItem bottomDivider>
+                <ListItem bottomDivider onPress={() => {}}>
                     <Icon name='settings' style={styles.icon} />
                     <ListItem.Content>
                         <ListItem.Title>Profile Setting</ListItem.Title>
                     </ListItem.Content>
                 </ListItem>
 
-                <ListItem bottomDivider>
+                <ListItem bottomDivider onPress={() => {}}>
                     <Icon name='account-balance-wallet' style={styles.icon} />
                     <ListItem.Content>
                         <ListItem.Title>Saving</ListItem.Title>
                     </ListItem.Content>
                 </ListItem>
 
-                <ListItem bottomDivider>
+                <ListItem bottomDivider onPress={() => {}}>
                     <View style={styles.icon}>
                         <Icon name='notifications' />
                         <Badge
@@ -51,15 +51,12 @@ export class ProfileScreen extends React.Component {
                     </ListItem.Content>
                 </ListItem>
 
-                <ListItem onPress={() => this.showEasterEgg1()}>
+                <ListItem onPress={() => this.showEasterEgg()}>
                     <Icon name='logout' style={styles.icon} />
                     <ListItem.Content>
                         <ListItem.Title>Logout</ListItem.Title>
                     </ListItem.Content>
                 </ListItem>
-
-
-                
 
                 {
                     this.state.easterEgg1 ?
@@ -80,6 +77,5 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#ecf0f1',
     },
 });

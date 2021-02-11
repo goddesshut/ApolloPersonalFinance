@@ -7,9 +7,9 @@ import { DashBoardScreen } from "../scenes/dashboard/dashboard.component";
 import { ProfileScreen } from "../scenes/profile/profile.component";
 import { TransactionNavigator } from "./transaction.navigator";
 import { Accounts} from "../scenes/accounts/accounts.component";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Tabs = createMaterialBottomTabNavigator();
-
 interface Props {
     initialRouteName: string;
 }

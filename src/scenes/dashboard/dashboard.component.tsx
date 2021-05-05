@@ -5,21 +5,97 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Card, Button, Icon, Text, Badge } from 'react-native-elements'
 import { CurrencyFormat } from "../../utils/currency-format.component"
 
-export class DashBoardScreen extends React.Component {
-
-    state = { easterEgg2: false }
+export class DashBoardScreen extends React.Component<any, any> {
 
     private scrollView: any;
 
     constructor(props) {
-        super(props)
+        super(props);
+        this.state = {
+            easterEgg2: false,
+            // state for get method
+            // dataJson: {
+            //     statusCode: 0,
+            //     body: [{}],
+            //     headers: {}
+            // },
+            savingExpense: {
+                period: "-",
+                retirement: "-",
+                mutualFund: "-",
+                regularRate: "-",
+                fixedRate: "-",
+                newBike: "-",
+                estRemainder: "-",
+                estimation: "-",
+                totalSaving: "-",
+                fixedSaving: "-"
+            }
+        }
     }
+
+    componentDidMount() {
+        console.log("componentDidMount");
+
+        // get method
+        // this.getDataJson().then((r) => {
+        //     console.debug("set state", r);
+        //     this.setState({ dataJson: r });
+        // });
+
+        this.getSavingExpense().then((res) => {
+            this.setState({ savingExpense: res.data.savingExpense });
+        })
+
+    }
+
+
+    private getSavingExpense() {
+        return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/saving/expense', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                period: 'monthly',
+                accountId: '123456'
+            })
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.debug("getSavingExpense response >>>", responseJson);
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
+
+    // get method
+    // private getDataJson() {
+    //     return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/test/testlambdatodynamodb', {
+    //         method: 'GET',
+    //         headers: {
+    //             Accept: 'application/json',
+    //             'Content-Type': 'application/json',
+    //         },
+    //     })
+    //         .then((response) => response.json())
+    //         .then((responseJson) => {
+    //             console.debug("responseJson >>>", responseJson);
+    //             return responseJson;
+    //         })
+    //         .catch((error) => {
+    //             console.error(error);
+    //         });
+    // }
 
     private showEasterEgg() {
         this.setState({ easterEgg2: true });
 
         setTimeout(() => {
-            this.scrollView.scrollToEnd({animated: true});
+            this.scrollView.scrollToEnd({ animated: true });
         }, 50)
 
         setTimeout(() => {
@@ -27,17 +103,14 @@ export class DashBoardScreen extends React.Component {
         }, 8000)
     }
 
-    render() {
-        // currencyFormat = (num, hide2digits) => {
-        //     const numWithDigits = hide2digits ? num.toString() : num.toFixed(2);
-        //     return numWithDigits.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-        // }
 
+    render() {
         return (
             <SafeAreaView>
-                <ScrollView ref={ref => {this.scrollView = ref}}>
+                <ScrollView ref={ref => { this.scrollView = ref }}>
                     <Card>
                         <Text style={styles.cardTitle}>February financial health</Text>
+                        {/* <Text style={styles.cardTitle}>1 {this.state.dataJson.body[0].message}</Text> */}
                         <View style={styles.row}>
                             <View style={styles.monthSavingPercentage}>
                                 <Text style={styles.labelPercentage}>{Math.round(monthSavingPercentage) + '%'}</Text>
@@ -150,7 +223,7 @@ export class DashBoardScreen extends React.Component {
                         </View>
                     </Card>
                     <Card>
-                        <Text style={styles.cardTitle}>Saving & Investment this month</Text>
+                        <Text style={styles.cardTitle}>Saving & Investment this {this.state.savingExpense.period}</Text>
                         <View style={styles.row}>
                             <View style={styles.col2_40}>
                                 <Pie
@@ -187,42 +260,42 @@ export class DashBoardScreen extends React.Component {
                             <View style={styles.col2_60}>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#c7d9e8' }} /> Retirement : </Text>
-                                    <CurrencyFormat value={siRetirementFund} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.savingExpense.retirement}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#a2c0d9' }} /> Mutual fund : </Text>
-                                    <CurrencyFormat value={siMutualFund} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.savingExpense.mutualFund}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#7da7ca' }} /> Regular rate : </Text>
-                                    <CurrencyFormat value={siRegularSaving} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.savingExpense.regularRate}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#588ebb' }} /> Fixed rate (A) : </Text>
-                                    <CurrencyFormat value={siFixedRateSaving} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.savingExpense.fixedRate}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#3f75a2' }} /> New bike (A) : </Text>
-                                    <CurrencyFormat value={siNewBikeSaving} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.savingExpense.newBike}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#82b446' }} /> Est. Remainder : </Text>
-                                    <CurrencyFormat value={siEstimate - saving} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.savingExpense.estRemainder}</Text>
                                 </View>
                             </View>
                         </View>
                         {/* <Card.Divider style={{margin: 0, padding: 0}}/> */}
                         <View style={styles.row}>
                             <View style={styles.col3}>
-                                <CurrencyFormat value={siEstimate} style={styles.moneyValue} />
+                                <Text style={styles.moneyValue}>{this.state.savingExpense.estimation}</Text>
                                 <Text style={styles.labelSmall}>Estimation</Text>
                             </View>
                             <View style={styles.col3}>
-                                <CurrencyFormat value={saving} style={styles.moneyValueGreen} />
+                                <Text style={styles.moneyValueGreen}>{this.state.savingExpense.totalSaving}</Text>
                                 <Text style={styles.labelSmall}>Total saving</Text>
                             </View>
                             <View style={styles.col3}>
-                                <CurrencyFormat value={siFixedAmountSaving} style={styles.moneyValueGreen} />
+                                <Text style={styles.moneyValueGreen}>{this.state.savingExpense.fixedSaving}</Text>
                                 <Text style={styles.labelSmall}>Fixed saving</Text>
                             </View>
                         </View>
@@ -282,7 +355,7 @@ export class DashBoardScreen extends React.Component {
                             this.state.easterEgg2 ?
                                 (
                                     <View style={styles.easterEggContainer}>
-                                        <Image source={require('../../resource/Shine.gif')} style={{ width: 350, height: 350 }} />
+
                                     </View>
                                 )
                                 : null

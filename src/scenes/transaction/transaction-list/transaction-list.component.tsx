@@ -10,45 +10,27 @@ interface Props {
     type: string;
 }
 
-export class TransactionListScreen extends Component<Props> {
+export class TransactionListScreen extends Component<any, any> {
 
-    private transactionDetail: TransactionDetail[] = [];
     private accoundId = "293-92880988";
-    state = { accountTransactionDetail: [] as TransactionDetail[], transactionDetail: [] as TransactionDetail[]};
 
     constructor(props) {
         super(props);
         this.state = {
             accountTransactionDetail: [],
-            transactionDetail:[]
         };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         this.getAccountTransaction(this.accoundId).then((res) => {
-            //this.transactionDetail = res.body;
-            
-            this.setState({accountTransactionDetail: res.body});
-            this.getTransactioDetail();
-            console.log('componentDidMount', this.state.transactionDetail);
+            this.setState({ accountTransactionDetail: res.body });
         });
-        
-    }
 
-    // reload when properties has change
-    shouldComponentUpdate(nextProps) {
-        if (this.props.transactionId !== nextProps.transactionId) {
-            this.getTransactioDetail();
-            return true;
-        }
-        return false;
     }
 
     render() {
-
-        console.log('anacondong', this.state.transactionDetail);
         return (
-            this.state.transactionDetail.map((item, index) => (
+            this.state.accountTransactionDetail.filter(x => x.accountNumber === this.props.transactionId).map((item, index) => (
                 <Card key={`tranaction-detail-${index + 1}`} containerStyle={{ borderRadius: 10 }}>
                     <View style={styles.row}>
                         <Icon reverse name='payments' size={20} color={'blue'} key={'icon' + index} />
@@ -60,24 +42,12 @@ export class TransactionListScreen extends Component<Props> {
                         <Text style={{ flex: 1, textAlign: "right" }} key={'updateDate' + index}>{item.updateDate}</Text>
                     </View>
                 </Card>
-
             ))
         )
     }
 
-    private getTransactioDetail() {
-        if (this.props.type === 'account') {
-            this.setState({transactionDetail : this.state.accountTransactionDetail.filter(x => x.accountNumber === this.props.transactionId)});
-            // console.log('transaction detail',this.state.transactionDetail);
-            // console.log('id', this.props.transactionId);
-            // console.log('account detail', this.state.accountTransactionDetail)
-        } else {
-            this.setState({transactionDetail : this.state.accountTransactionDetail.filter(x => x.categoryType === this.props.transactionId)});
-        }
-
-    }
     private getAccountTransaction(accountid) {
-        return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/transactions?accountid='+ accountid, {
+        return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/transactions?accountid=' + accountid, {
             method: 'GET',
             headers: {
                 Accept: 'application/json',

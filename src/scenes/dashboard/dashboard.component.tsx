@@ -31,6 +31,19 @@ export class DashBoardScreen extends React.Component<any, any> {
                 estimation: "-",
                 totalSaving: "-",
                 fixedSaving: "-"
+            },
+            expense: {
+                transport: "-",
+                foodDrink: "-",
+                fixedSaving: "-",
+                estRemainder: "-",
+                period: "-",
+                electricityBill: "-",
+                estimation: "-",
+                Others: "-",
+                totalSaving: "-",
+                houseLoan: "-",
+                expenseId: "-"
             }
         }
     }
@@ -44,12 +57,39 @@ export class DashBoardScreen extends React.Component<any, any> {
         //     this.setState({ dataJson: r });
         // });
 
+        this.getExpense().then((res) => {
+            this.setState({ expense: res.data[0] });
+        })
+
         this.getSavingExpense().then((res) => {
             this.setState({ savingExpense: res.data[0] });
         })
 
     }
 
+
+    private getExpense() {
+        return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/expense', {
+            method: 'POST',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': this.authToken
+            },
+            body: JSON.stringify({
+                period: 'monthly',
+                accountId: '123456'
+            })
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                console.debug("response from getExpense >>>", responseJson);
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
 
     private getSavingExpense() {
         return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/saving/expense', {
@@ -147,7 +187,7 @@ export class DashBoardScreen extends React.Component<any, any> {
                         </View>
                     </Card>
                     <Card>
-                        <Text style={styles.cardTitle}>Expense this month</Text>
+                        <Text style={styles.cardTitle}>Expense this {this.state.expense.period}</Text>
                         <View style={styles.row}>
                             <View style={styles.col2_40}>
                                 <Pie
@@ -184,27 +224,27 @@ export class DashBoardScreen extends React.Component<any, any> {
                             <View style={styles.col2_60}>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#dda7c4' }} /> House loan (A): </Text>
-                                    <CurrencyFormat value={epHouseLoan} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.houseLoan}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#cc7ba7' }} /> Electricity bill : </Text>
-                                    <CurrencyFormat value={epElectricity} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.electricityBill}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#a23f75' }} /> Food/drink : </Text>
-                                    <CurrencyFormat value={epFood} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.foodDrink}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#7d315a' }} /> Transport : </Text>
-                                    <CurrencyFormat value={epTransport} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.epTransport}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#5f2545' }} /> Others : </Text>
-                                    <CurrencyFormat value={epOthers} style={styles.epMoneyValueRed} />
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.Others}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#82b446' }} /> Est. Remainder : </Text>
-                                    <CurrencyFormat value={epEstimate - expense} style={styles.epMoneyValueGreen} />
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.expense.Remainder}</Text>
                                 </View>
                             </View>
                         </View>
@@ -212,14 +252,14 @@ export class DashBoardScreen extends React.Component<any, any> {
                         <View style={styles.row}>
                             <View style={styles.col3}>
                                 <CurrencyFormat value={epEstimate} style={styles.moneyValue} />
-                                <Text style={styles.labelSmall}>Estimation</Text>
+                                <Text style={styles.labelSmall}>{this.state.expense.estimation}</Text>
                             </View>
                             <View style={styles.col3}>
-                                <CurrencyFormat value={expense} style={styles.moneyValueRed} />
+                                <Text style={styles.moneyValueRed}>{this.state.expense.totalSaving}</Text>
                                 <Text style={styles.labelSmall}>Total spending</Text>
                             </View>
                             <View style={styles.col3}>
-                                <CurrencyFormat value={epHouseLoan} style={styles.moneyValueRed} />
+                                <Text style={styles.moneyValueRed}>{this.state.expense.fixedSaving}</Text>
                                 <Text style={styles.labelSmall}>Fixed expense</Text>
                             </View>
                         </View>

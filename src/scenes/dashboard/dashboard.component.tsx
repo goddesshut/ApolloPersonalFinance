@@ -236,7 +236,7 @@ export class DashBoardScreen extends React.Component<any, any> {
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#7d315a' }} /> Transport : </Text>
-                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.epTransport}</Text>
+                                    <Text style={styles.epMoneyValueRed}>{this.state.expense.transport}</Text>
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#5f2545' }} /> Others : </Text>
@@ -244,7 +244,7 @@ export class DashBoardScreen extends React.Component<any, any> {
                                 </View>
                                 <View style={styles.epDetailRow}>
                                     <Text style={styles.labelSmall}><Badge badgeStyle={{ backgroundColor: '#82b446' }} /> Est. Remainder : </Text>
-                                    <Text style={styles.epMoneyValueGreen}>{this.state.expense.Remainder}</Text>
+                                    <Text style={styles.epMoneyValueGreen}>{this.state.expense.estRemainder}</Text>
                                 </View>
                             </View>
                         </View>

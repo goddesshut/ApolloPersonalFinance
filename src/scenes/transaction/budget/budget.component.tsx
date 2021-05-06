@@ -8,9 +8,15 @@ import { CategoryType } from "../../../model/categoryType";
 import { TransactionListScreen } from "../transaction-list/transaction-list.component";
 
 interface IBudgetList {
-    categoryType: CategoryType,
+    id: number,
+    accountId: string,
+    name: string,
+    startDate: string,
+    endDate: string
     balance: number,
-    icon: string
+
+    categoryType?: CategoryType,
+    icon?: string
 }
 
 export class BudgetScreen extends Component {
@@ -19,22 +25,22 @@ export class BudgetScreen extends Component {
 
     constructor(props) {
         super(props);
+    }
 
-        this.state = {
-            activeIndex: 0,
-            budgetList: [
-                {
-                    categoryType: CategoryType.SHOPING,
-                    balance: 50000.00,
-                    icon: 'shopping-bag'
-                },
-                {
-                    categoryType: CategoryType.Utility,
-                    balance: 24000.00,
-                    icon: 'library-books'
-                }
-            ]
-        }
+    componentDidMount() {
+
+        fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/budget?accountId=12333', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then((response: any) => {
+            this.setState({ activeIndex: 0, budgetList: response.data})
+        })
+        .catch((error) => console.error(error))
     }
 
     private renderItem({ item, index }) {
@@ -42,18 +48,21 @@ export class BudgetScreen extends Component {
             <View style={styles.slide}>
                 <View style={styles.slideInnerContainer}>
                     <View style={{ flexDirection: 'row' }}>
-                        <Icon name={item.icon} style={styles.icon} size={42} color={'green'} />
-                        <Text style={{ fontSize: 28 }}>{item.categoryType}</Text>
+                        {/* <Icon name={item.icon} style={styles.icon} size={42} color={'green'} /> */}
+                        <Text style={{ fontSize: 28 }}>{item.name}</Text>
                     </View>
-                    {/* <Text style={{ paddingTop: 25, fontSize: 18, fontWeight: '600' }}>
-                        Budget balance: {item.balance}
-                    </Text> */}
 
                     <View style={{ flex: 1, flexDirection: 'row' }}>
                         <Text style={{ paddingTop: 15, fontSize: 16 }}>
-                        Budget balance : &nbsp;
+                            Budget balance : &nbsp;
                         </Text>
                         <CurrencyFormat style={{ paddingTop: 15, fontSize: 16 }} value={item.balance} />
+                    </View>
+                    <View style={{ flex: 1, flexDirection: 'row' }}>
+                        <Text style={{ paddingTop: 3, fontSize: 16 }}>
+                            End Date : &nbsp;
+                        </Text>
+                        <Text style={{ paddingTop: 3, fontSize: 16 }}>{item.endDate}</Text>
                     </View>
                 </View>
             </View>
@@ -63,20 +72,28 @@ export class BudgetScreen extends Component {
     render() {
         return (
             <SafeAreaView>
-                <View style={{ paddingTop: 20 }}>
-                    <Carousel
-                        layout={"default"}
-                        data={this.state.budgetList}
-                        sliderWidth={sliderWidth}
-                        itemWidth={itemWidth}
-                        itemHeight={itemHeight}
-                        renderItem={this.renderItem}
-                        onSnapToItem={index => this.setState({ activeIndex: index })} />
-                </View>
+                {
+                    this.state.budgetList.length > 0 ?
+                    <View style={{ paddingTop: 20 }}>
+                        <Carousel
+                            layout={"default"}
+                            data={this.state.budgetList}
+                            sliderWidth={sliderWidth}
+                            itemWidth={itemWidth}
+                            itemHeight={itemHeight}
+                            renderItem={this.renderItem}
+                            onSnapToItem={index => this.setState({ activeIndex: index })} />
+                    </View>
+                    : <Text>No data</Text>
+                }
+                
 
                 <View style={{ paddingTop: 15, paddingLeft: 20 }}><Text style={{ fontSize: 16 }}>Tracsaction list</Text></View>
                 <ScrollView style={styles.transactionContainer}>
-                    <TransactionListScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].categoryType} type={'budget'} />
+                    {
+                        this.state.budgetList.length > 0 ?
+                        <TransactionListScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].id} type={'budget'} />: null
+                    }
                 </ScrollView>
             </SafeAreaView>
         )

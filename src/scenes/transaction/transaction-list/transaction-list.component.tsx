@@ -6,7 +6,7 @@ import { TransactionType } from "../../../model/transactionType";
 import { TransactionDetail, TransactionDetailData } from "../model/transaction-list.model";
 
 interface Props {
-    transactionId: string;
+    transactionId: any;
     type: string;
 }
 
@@ -52,8 +52,8 @@ export class TransactionListScreen extends Component<Props> {
     private getTransactioDetail() {
         if (this.props.type === 'account') {
             this.transactionDetail = TransactionDetailData.filter(x => x.accountNumber === this.props.transactionId);
-        } else {
-            this.transactionDetail = TransactionDetailData.filter(x => x.categoryType === this.props.transactionId);
+        } else {            
+            this.transactionDetail = TransactionDetailData.filter(x => x.budgetId === this.props.transactionId);
         }
 
     }

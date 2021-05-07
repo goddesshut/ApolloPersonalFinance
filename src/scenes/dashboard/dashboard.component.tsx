@@ -58,11 +58,16 @@ export class DashBoardScreen extends React.Component<any, any> {
         // });
 
         this.getExpense().then((res) => {
-            this.setState({ expense: res.data[0] });
+            if(res?.data) {
+                this.setState({ expense: res.data[0] });
+            }
+            
         })
 
         this.getSavingExpense().then((res) => {
-            this.setState({ savingExpense: res.data[0] });
+            if(res?.data) {
+                this.setState({ savingExpense: res.data[0] });
+            }
         })
 
     }
@@ -83,7 +88,6 @@ export class DashBoardScreen extends React.Component<any, any> {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.debug("response from getExpense >>>", responseJson);
                 return responseJson;
             })
             .catch((error) => {
@@ -106,7 +110,6 @@ export class DashBoardScreen extends React.Component<any, any> {
         })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.debug("response from getSavingExpense >>>", responseJson);
                 return responseJson;
             })
             .catch((error) => {

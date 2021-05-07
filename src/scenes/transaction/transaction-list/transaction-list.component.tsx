@@ -6,7 +6,7 @@ import { TransactionType } from "../../../model/transactionType";
 import { TransactionDetail } from "../model/transaction-list.model";
 
 interface Props {
-    transactionId: string;
+    transactionId: any;
     type: string;
 }
 
@@ -61,7 +61,16 @@ export class TransactionListScreen extends Component<any, any> {
             .catch((error) => {
                 console.error(error);
             });
-    }
+        }
+    
+
+    // private getTransactioDetail() {
+    //     if (this.props.type === 'account') {
+    //         this.transactionDetail = TransactionDetailData.filter(x => x.accountNumber === this.props.transactionId);
+    //     } else {            
+    //         this.transactionDetail = TransactionDetailData.filter(x => x.budgetId === this.props.transactionId);
+    //     }
+    // }
 }
 
 const styles = StyleSheet.create({

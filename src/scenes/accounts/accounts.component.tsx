@@ -11,6 +11,9 @@ export interface Accounts {
 }
 
 export class Accounts extends React.Component<any, any> {
+
+    private readonly accessToken = 'eyJraWQiOiJMVHBWV29EdExjdUhyRnB1MW5VXC84QSt0QTdXWXI4QllQbFNpODJUaUZ5bz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYTYxNDE0OC0yMjQ5LTRlMjgtOGRmYy0yNTUwYmM1OTFmMWQiLCJjb2duaXRvOmdyb3VwcyI6WyJBcG9sbG9Hcm91cCJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfWGFiRTNBeW1QIiwidmVyc2lvbiI6MiwiY2xpZW50X2lkIjoiNXU2MzhybTFycmtmaHBudDV2YTFqcDBrOGUiLCJldmVudF9pZCI6IjY5YWVlMTBmLTg4YmQtNDk1OS1hNTYzLTU4MzM3NTVjZGI0NyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4gcGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNjIwMzU4Njk5LCJleHAiOjE2MjA0NDUwOTksImlhdCI6MTYyMDM1ODY5OSwianRpIjoiY2JjZjA3MGUtYTgyZC00YTJmLTgyMDItYmM2YjkzZjA2YjBiIiwidXNlcm5hbWUiOiJhcG9sbG8ifQ.l8vgwlo5XjMJuF0WcOPsL182iUceaLLUYxgu-amX6mJhBkWVBJs78eokjSk36q0tu7sY9Rq4b_ZGKBgEQ1mMAB6ez0qzzKQK5MF7wQWTzAwT_seS844JBzgwgkGqlvj_ehGPfgy72J4lh3s6IbfHk9rkPU3i2XbJcIbDG2VZCro1cS4Eo1tWur1PyRNx9bMyNbED8gv3JppyqLpDrzg2rcpNz2xc6VniDUHC2uMmmf3n0mCK2S8D2iRhuxhhcl9DYFAtbZWuWtQu8IUF1I-rTzMgFqY0RgRyoa4GRwIpcogN2IfeUiGT6kI3eSdIvB7ELtPHgERt_Y1R8POJcNIktA'
+
     constructor(props) {
       super(props);
       
@@ -33,7 +36,7 @@ export class Accounts extends React.Component<any, any> {
           headers: {
               Accept: 'application/json',
               'Content-Type': 'application/json',
-              'Authorization': 'eyJraWQiOiJMVHBWV29EdExjdUhyRnB1MW5VXC84QSt0QTdXWXI4QllQbFNpODJUaUZ5bz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYTYxNDE0OC0yMjQ5LTRlMjgtOGRmYy0yNTUwYmM1OTFmMWQiLCJjb2duaXRvOmdyb3VwcyI6WyJBcG9sbG9Hcm91cCJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfWGFiRTNBeW1QIiwidmVyc2lvbiI6MiwiY2xpZW50X2lkIjoiNXU2MzhybTFycmtmaHBudDV2YTFqcDBrOGUiLCJldmVudF9pZCI6IjJlZGQ3OWNlLTUzNWMtNGU4Zi05MTQwLTM3NzgyMzgyYzVlNSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4gcGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNjIwMjY2NjEwLCJleHAiOjE2MjAzNTMwMTAsImlhdCI6MTYyMDI2NjYxMSwianRpIjoiMDgwMzk2NDktOGVjMy00YjQ0LWEyNTYtZTBmMTllZDY5MDA0IiwidXNlcm5hbWUiOiJhcG9sbG8ifQ.aUUemZXTUa0uEnBXMKDHJIr4g8W63JB8ECCkezxOLsRXZnWOTUbxsWogxwDt2WzyeXwiLNc6yBa73O9G7NTKxW6L1ijdTk111q0jxxxBgsgXqF16HGU4fz2jQENuj5iDVC2vznmAo1S4W3qluP4mJdXMhjdLD0yQFyIydL8MxkTDR2J1J3GKGCOokrZ7Hdxiw_QHhUMwXpGQ961F1t0HN-HmSigHYDXzxj3QEZ1uT90DZiRZCflW5x2LI6tDBWWFThs7w1RZYidocxwo0UBcF7__CcE9RlBbeB_OgzOJMbPJti1mXxfnm9kGdG4tWCd0UDk9Wv9wCpdMUMbG63sfoQ'
+              'Authorization': this.accessToken
           },
           body: JSON.stringify({
               period: 'monthly', 

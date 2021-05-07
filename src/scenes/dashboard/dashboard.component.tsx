@@ -8,7 +8,7 @@ import { CurrencyFormat } from "../../utils/currency-format.component"
 export class DashBoardScreen extends React.Component<any, any> {
 
     private scrollView: any;
-    private authToken = 'eyJraWQiOiJMVHBWV29EdExjdUhyRnB1MW5VXC84QSt0QTdXWXI4QllQbFNpODJUaUZ5bz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYTYxNDE0OC0yMjQ5LTRlMjgtOGRmYy0yNTUwYmM1OTFmMWQiLCJjb2duaXRvOmdyb3VwcyI6WyJBcG9sbG9Hcm91cCJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfWGFiRTNBeW1QIiwidmVyc2lvbiI6MiwiY2xpZW50X2lkIjoiNXU2MzhybTFycmtmaHBudDV2YTFqcDBrOGUiLCJldmVudF9pZCI6IjJlZGQ3OWNlLTUzNWMtNGU4Zi05MTQwLTM3NzgyMzgyYzVlNSIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4gcGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNjIwMjY2NjEwLCJleHAiOjE2MjAzNTMwMTAsImlhdCI6MTYyMDI2NjYxMSwianRpIjoiMDgwMzk2NDktOGVjMy00YjQ0LWEyNTYtZTBmMTllZDY5MDA0IiwidXNlcm5hbWUiOiJhcG9sbG8ifQ.aUUemZXTUa0uEnBXMKDHJIr4g8W63JB8ECCkezxOLsRXZnWOTUbxsWogxwDt2WzyeXwiLNc6yBa73O9G7NTKxW6L1ijdTk111q0jxxxBgsgXqF16HGU4fz2jQENuj5iDVC2vznmAo1S4W3qluP4mJdXMhjdLD0yQFyIydL8MxkTDR2J1J3GKGCOokrZ7Hdxiw_QHhUMwXpGQ961F1t0HN-HmSigHYDXzxj3QEZ1uT90DZiRZCflW5x2LI6tDBWWFThs7w1RZYidocxwo0UBcF7__CcE9RlBbeB_OgzOJMbPJti1mXxfnm9kGdG4tWCd0UDk9Wv9wCpdMUMbG63sfoQ';
+    private authToken = 'eyJraWQiOiJMVHBWV29EdExjdUhyRnB1MW5VXC84QSt0QTdXWXI4QllQbFNpODJUaUZ5bz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJmYTYxNDE0OC0yMjQ5LTRlMjgtOGRmYy0yNTUwYmM1OTFmMWQiLCJjb2duaXRvOmdyb3VwcyI6WyJBcG9sbG9Hcm91cCJdLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAuYXAtc291dGhlYXN0LTEuYW1hem9uYXdzLmNvbVwvYXAtc291dGhlYXN0LTFfWGFiRTNBeW1QIiwidmVyc2lvbiI6MiwiY2xpZW50X2lkIjoiNXU2MzhybTFycmtmaHBudDV2YTFqcDBrOGUiLCJldmVudF9pZCI6IjI4Y2Q2ZjA1LTA3MzgtNDRkYS05NzE2LTkzY2ZiOTlhMGFlYyIsInRva2VuX3VzZSI6ImFjY2VzcyIsInNjb3BlIjoiYXdzLmNvZ25pdG8uc2lnbmluLnVzZXIuYWRtaW4gcGhvbmUgb3BlbmlkIGVtYWlsIiwiYXV0aF90aW1lIjoxNjIwMzU2MDY3LCJleHAiOjE2MjA0NDI0NjcsImlhdCI6MTYyMDM1NjA2NywianRpIjoiNzM3NDA1MWUtNGU4MS00ZWUzLThlZjktMTMyZjg5YjFlYWI5IiwidXNlcm5hbWUiOiJhcG9sbG8ifQ.Dop5Eyn6oukUhvtuqoXd5Pw2tmM6q0TkFc4yCGIFpCejJdccRivys43W_DxqOHFKE30ri-cGa-DuWE4yr3xXP6ZQmGIdPU5GXhTLaDe33Eij9DjKgeBktATSpQdtxjaf_cJf5n76VzLwEwdPJbfHy6d5w-38Ppml5i-_LxkVcUh0StAvjGILj-Oa7r6ITjeR3dtUXi9ziFFK3jD9z90nYpGr8PD5GDfK-67OMrEFlDFlBodq96JsmjQAoc9PKDz2xRgh428LRCT-zFzujbOnH8vVbyswlYh9S-Nb8I5OtPGqT674w4UElZRZQUSeo8q9Z1Qop5iDGOyiD9JjFLvi4g';
 
     constructor(props) {
         super(props);
@@ -58,14 +58,14 @@ export class DashBoardScreen extends React.Component<any, any> {
         // });
 
         this.getExpense().then((res) => {
-            if(res?.data) {
+            if (res?.data) {
                 this.setState({ expense: res.data[0] });
             }
-            
+
         })
 
         this.getSavingExpense().then((res) => {
-            if(res?.data) {
+            if (res?.data) {
                 this.setState({ savingExpense: res.data[0] });
             }
         })

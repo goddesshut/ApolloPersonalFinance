@@ -6,6 +6,7 @@ import Carousel from "react-native-snap-carousel";
 import { CurrencyFormat } from "../../../utils/currency-format.component"
 import { CategoryType } from "../../../model/categoryType";
 import { TransactionListScreen } from "../transaction-list/transaction-list.component";
+import { BudgetTransactionListScreen } from "../transaction-list/budget-transaction-list";
 
 interface IBudgetList {
     id: number,
@@ -92,7 +93,7 @@ export class BudgetScreen extends Component {
                 <ScrollView style={styles.transactionContainer}>
                     {
                         this.state.budgetList.length > 0 ?
-                        <TransactionListScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].id} type={'budget'} />: null
+                        <BudgetTransactionListScreen key={this.state.activeIndex} transactionId={this.state.budgetList[this.state.activeIndex].id} type={'budget'} />: null
                     }
                 </ScrollView>
             </SafeAreaView>

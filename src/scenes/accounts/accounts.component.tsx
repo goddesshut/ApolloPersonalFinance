@@ -20,8 +20,10 @@ export class Accounts extends React.Component<any, any> {
     }
 
     componentDidMount() {
-      this.getAccounts().then((res) => {
-        this.setState({ accounts: res.data });
+      this.getAccounts().then((res) => {          
+          if(res?.data) {
+            this.setState({ accounts: res.data });
+          }
       })
     }
 

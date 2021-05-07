@@ -3,36 +3,34 @@ import { StyleSheet, Text, View } from "react-native";
 import { Icon, Card } from "react-native-elements";
 import { CurrencyFormat } from "../../../utils/currency-format.component"
 import { TransactionType } from "../../../model/transactionType";
-import { TransactionDetail, TransactionDetailData } from "../model/transaction-list.model";
+import { TransactionDetail } from "../model/transaction-list.model";
 
 interface Props {
     transactionId: any;
     type: string;
 }
 
-export class TransactionListScreen extends Component<Props> {
+export class TransactionListScreen extends Component<any, any> {
 
-    private transactionDetail: TransactionDetail[] = [];
+    private accoundId = "293-92880988";
 
     constructor(props) {
         super(props);
-        // first time loading data
-        this.getTransactioDetail();
+        this.state = {
+            accountTransactionDetail: [],
+        };
     }
 
-    // reload when properties has change
-    shouldComponentUpdate(nextProps) {
-        if (this.props.transactionId !== nextProps.transactionId) {
-            this.getTransactioDetail();
-            return true;
-        }
+    componentDidMount() {
+        this.getAccountTransaction(this.accoundId).then((res) => {
+            this.setState({ accountTransactionDetail: res.body });
+        });
 
-        return false;
     }
 
     render() {
         return (
-            this.transactionDetail.map((item, index) => (
+            this.state.accountTransactionDetail.filter(x => x.accountNumber === this.props.transactionId).map((item, index) => (
                 <Card key={`tranaction-detail-${index + 1}`} containerStyle={{ borderRadius: 10 }}>
                     <View style={styles.row}>
                         <Icon reverse name='payments' size={20} color={'blue'} key={'icon' + index} />
@@ -44,19 +42,35 @@ export class TransactionListScreen extends Component<Props> {
                         <Text style={{ flex: 1, textAlign: "right" }} key={'updateDate' + index}>{item.updateDate}</Text>
                     </View>
                 </Card>
-
             ))
         )
     }
 
-    private getTransactioDetail() {
-        if (this.props.type === 'account') {
-            this.transactionDetail = TransactionDetailData.filter(x => x.accountNumber === this.props.transactionId);
-        } else {            
-            this.transactionDetail = TransactionDetailData.filter(x => x.budgetId === this.props.transactionId);
+    private getAccountTransaction(accountid) {
+        return fetch('https://1to2o3kdx7.execute-api.ap-southeast-1.amazonaws.com/dev/transactions?accountid=' + accountid, {
+            method: 'GET',
+            headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json',
+            }
+        })
+            .then((response) => response.json())
+            .then((responseJson) => {
+                return responseJson;
+            })
+            .catch((error) => {
+                console.error(error);
+            });
         }
+    
 
-    }
+    // private getTransactioDetail() {
+    //     if (this.props.type === 'account') {
+    //         this.transactionDetail = TransactionDetailData.filter(x => x.accountNumber === this.props.transactionId);
+    //     } else {            
+    //         this.transactionDetail = TransactionDetailData.filter(x => x.budgetId === this.props.transactionId);
+    //     }
+    // }
 }
 
 const styles = StyleSheet.create({

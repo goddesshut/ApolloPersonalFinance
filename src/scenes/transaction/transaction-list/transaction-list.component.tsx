@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { Icon, Card } from "react-native-elements";
-import { CurrencyFormat } from "../../../utils/currency-format.component"
+import { CurrencyFormat } from "../../../utils/currency-format.component";
 import { TransactionType } from "../../../model/transactionType";
-import { TransactionDetail } from "../model/transaction-list.model";
 
 interface Props {
     transactionId: any;
@@ -17,15 +16,14 @@ export class TransactionListScreen extends Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            accountTransactionDetail: [],
+            accountTransactionDetail: []
         };
     }
 
     componentDidMount() {
         this.getAccountTransaction(this.accoundId).then((res) => {
             this.setState({ accountTransactionDetail: res.body });
-        });
-
+         });
     }
 
     render() {
@@ -61,7 +59,7 @@ export class TransactionListScreen extends Component<any, any> {
             .catch((error) => {
                 console.error(error);
             });
-        }
+    }
     
 
     // private getTransactioDetail() {
